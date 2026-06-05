@@ -9,7 +9,7 @@
 
 ---
 
-## 👥 Integrantes
+##  Integrantes
 
 | Nome |
 |------|
@@ -20,15 +20,15 @@
 
 ---
 
-## 📋 Descrição do Projeto
+##  Descrição do Projeto
 
 Este projeto foi desenvolvido como atividade prática da disciplina de Microcontroladores e Microprocessadores (ELET0021). O objetivo é projetar, com o auxílio da ferramenta **Pico SDK**, um sistema capaz de controlar o **ângulo de um servomotor** por meio de um **joystick analógico**, utilizando os periféricos **ADC (Conversor Analógico-Digital)** e **PWM (Pulse Width Modulation)** presentes no microcontrolador **RP2040**.
 
-> ⚠️ **Observação importante:** Em virtude da ausência de aulas de laboratório presencial no período de realização desta atividade, não foi possível utilizar a placa física **BitDogLAB**. Dessa forma, **toda a prática foi realizada integralmente por simulação computacional no ambiente Wokwi**, incluindo tanto o joystick analógico quanto o servomotor, ambos simulados dentro do VS Code com a extensão Wokwi integrada.
+> **Observação importante:** Em virtude da ausência de aulas de laboratório presencial no período de realização desta atividade, não foi possível utilizar a placa física **BitDogLAB**. Dessa forma, **toda a prática foi realizada integralmente por simulação computacional no ambiente Wokwi**, incluindo tanto o joystick analógico quanto o servomotor, ambos simulados dentro do VS Code com a extensão Wokwi integrada.
 
 ---
 
-## 🎯 Objetivos
+##  Objetivos
 
 - Compreender o funcionamento do conversor A/D presente no RP2040.
 - Configurar e utilizar o módulo PWM para controle de servomotores.
@@ -38,7 +38,7 @@ Este projeto foi desenvolvido como atividade prática da disciplina de Microcont
 
 ---
 
-## 🛠️ Hardware e Software Utilizados
+##  Hardware e Software Utilizados
 
 ### Hardware (Simulado no Wokwi)
 | Item | Descrição |
@@ -60,7 +60,7 @@ Este projeto foi desenvolvido como atividade prática da disciplina de Microcont
 
 ---
 
-## 🔌 Esquema de Conexões
+##  Esquema de Conexões
 
 ```
 Raspberry Pi Pico W          Joystick Analógico
@@ -81,7 +81,7 @@ GND                ─────────► GND   (marrom/preto)
 
 ---
 
-## ⚙️ Funcionamento do Sistema
+##  Funcionamento do Sistema
 
 ### 1. Leitura do Joystick (ADC)
 
@@ -121,7 +121,7 @@ O servomotor padrão opera com sinal PWM de **50 Hz** (período de 20 ms). A lar
 
 ---
 
-## 📁 Estrutura do Repositório
+##  Estrutura do Repositório
 
 ```
 .
@@ -133,7 +133,7 @@ O servomotor padrão opera com sinal PWM de **50 Hz** (período de 20 ms). A lar
 
 ---
 
-## 🚀 Como Compilar e Executar
+##  Como Compilar e Executar
 
 ### Pré-requisitos
 
@@ -169,7 +169,7 @@ Após a compilação, o arquivo `servo_joystick.uf2` estará disponível na past
 
 ---
 
-## 🧪 Testes Realizados
+##  Testes Realizados
 
 ### Teste 1 – Verificação do ADC
 - **Objetivo:** Confirmar que o ADC lê corretamente os valores do joystick.
@@ -188,7 +188,7 @@ Após a compilação, o arquivo `servo_joystick.uf2` estará disponível na past
 
 ---
 
-## 📊 Resultados
+##  Resultados
 
 Toda a validação do sistema foi conduzida no simulador Wokwi, dado que as aulas de laboratório presencial não foram realizadas no período desta atividade. Dentro do ambiente simulado, o sistema funcionou conforme esperado: a leitura do ADC respondeu linearmente ao movimento do joystick virtual, e o mapeamento para largura de pulso PWM resultou em controle proporcional e suave do ângulo do servomotor. O debug via serial (USB) do próprio Wokwi permitiu verificar em tempo real os valores de ADC, pulso em µs e ângulo calculado.
 
@@ -203,7 +203,7 @@ ADC: 4095 | Pulso: 2500 µs | Ângulo: 180°
 
 ---
 
-## 🎬 Vídeo de Demonstração
+##  Vídeo de Demonstração
 
 > 🔗 Link do vídeo: *(a ser preenchido após gravação)*
 
@@ -211,7 +211,7 @@ O vídeo apresenta a solução desenvolvida, demonstrando o funcionamento comple
 
 ---
 
-## 📚 Referências
+##  Referências
 
 - [Raspberry Pi Pico SDK Documentation](https://datasheets.raspberrypi.com/pico/raspberry-pi-pico-c-sdk.pdf)
 - [RP2040 Datasheet](https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf)
