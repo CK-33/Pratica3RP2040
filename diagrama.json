@@ -4,36 +4,40 @@
   "editor": "wokwi",
   "parts": [
     {
-      "type": "wokwi-pi-pico-w",
+      "type": "wokwi-pi-pico",
       "id": "pico",
-      "top": 80,
-      "left": 0,
+      "top": 100,
+      "left": 100,
       "attrs": {}
     },
     {
       "type": "wokwi-analog-joystick",
       "id": "joystick",
       "top": 0,
-      "left": 230,
+      "left": 350,
       "attrs": {}
     },
     {
       "type": "wokwi-servo",
       "id": "servo1",
       "top": 200,
-      "left": 230,
+      "left": 350,
       "attrs": {}
     }
   ],
+  
   "connections": [
-    [ "pico:GP26",  "joystick:VRY", "green",  [] ],
-    [ "pico:GP27",  "joystick:VRX", "blue",   [] ],
-    [ "pico:3V3",   "joystick:VCC", "red",    [] ],
-    [ "pico:GND.1", "joystick:GND", "black",  [] ],
+    [ "pico:GP26",  "joystick:VERT", "green",  [] ],
+    [ "pico:GP27",  "joystick:HORZ", "blue",   [] ],
+    [ "pico:3V3",   "joystick:VCC",  "red",    [] ],
+    [ "pico:GND.1", "joystick:GND",  "black",  [] ],
 
-    [ "pico:GP22",  "servo1:PWM",   "orange", [] ],
-    [ "pico:3V3",   "servo1:V+",    "red",    [] ],
-    [ "pico:GND.2", "servo1:GND",   "black",  [] ]
+    [ "pico:GP22",  "servo1:PWM",    "orange", [] ],
+    [ "pico:3V3",   "servo1:V+",     "red",    [] ],
+    [ "pico:GND.2", "servo1:GND",    "black",  [] ],
+    
+    [ "pico:GP28",  "joystick:SEL",  "white",  [] ]
   ],
+
   "dependencies": {}
 }
