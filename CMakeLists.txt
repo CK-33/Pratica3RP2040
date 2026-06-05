@@ -1,28 +1,33 @@
 cmake_minimum_required(VERSION 3.13)
 
-# Inicializa o SDK do Pico (deve ser feito antes de project())
-include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
+set(PICO_BOARD pico_w)
 
-project(servo_joystick C CXX ASM)
+set(PICO_SDK_PATH "C:/Users/thyag/.pico-sdk/sdk/2.2.0")
+
+include(${PICO_SDK_PATH}/external/pico_sdk_import.cmake)
+
+project(PWM_CONV_AD C CXX ASM)
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
 pico_sdk_init()
 
-add_executable(servo_joystick
-    servo_joystick.c
+add_executable(PWM_CONV_AD
+    PWM_CONV_AD.c
 )
 
-# Habilita saída USB e UART para printf (debug)
-pico_enable_stdio_usb(servo_joystick 1)
-pico_enable_stdio_uart(servo_joystick 0)
+pico_enable_stdio_usb(PWM_CONV_AD 1)
+pico_enable_stdio_uart(PWM_CONV_AD 0)
 
-# Linka as bibliotecas necessárias
-target_link_libraries(servo_joystick
+target_link_libraries(PWM_CONV_AD
     pico_stdlib
     hardware_adc
     hardware_pwm
 )
 
-# Gera arquivos .uf2, .hex, .bin etc.
-pico_add_extra_outputs(servo_joystick)
+set(picotool_DIR "C:/Users/thyag/.pico-sdk/picotool/2.2.0-a4/picotool")
+
+pico_add_extra_outputs(PWM_CONV_AD)
