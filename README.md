@@ -67,6 +67,7 @@ Raspberry Pi Pico W          Joystick Analógico
 ────────────────────         ──────────────────
 GP26 (ADC0)        ◄──────── VRY  (eixo Y)
 GP27 (ADC1)        ◄──────── VRX  (eixo X)
+GP28 (Digital)     ◄──────── SEL  (Botão de Clique)
 3V3                ─────────► VCC
 GND                ─────────► GND
 
@@ -98,8 +99,8 @@ O valor lido pelo ADC é mapeado linearmente para uma largura de pulso PWM corre
 pulse_us = SERVO_MIN_US + (adc_val × (SERVO_MAX_US - SERVO_MIN_US)) / ADC_MAX
 
 Onde:
-  SERVO_MIN_US = 500  µs  →  0°
-  SERVO_MAX_US = 2500 µs  →  180°
+  SERVO_MIN_US = 1000  µs  →  0°
+  SERVO_MAX_US = 2000 µs  →  180°
   ADC_MAX      = 4095
 ```
 
@@ -109,9 +110,9 @@ O servomotor padrão opera com sinal PWM de **50 Hz** (período de 20 ms). A lar
 
 | Largura do Pulso | Ângulo |
 |-----------------|--------|
-| ~0,5 ms (500 µs) | 0° |
+| ~1,0 ms (1000 µs) | 0° |
 | ~1,5 ms (1500 µs) | 90° (centro) |
-| ~2,5 ms (2500 µs) | 180° |
+| ~2,0 ms (2000 µs) | 180° |
 
 **Configuração do PWM no RP2040:**
 - Clock do sistema: 125 MHz
@@ -128,6 +129,7 @@ O servomotor padrão opera com sinal PWM de **50 Hz** (período de 20 ms). A lar
 ├── servo_joystick.c      # Código principal em C
 ├── CMakeLists.txt        # Arquivo de build (CMake + Pico SDK)
 ├── diagram.json          # Diagrama de simulação para o Wokwi
+├── wokwi.toml            # Configuração de execução do firmware no Wokwi
 └── README.md             # Este arquivo
 ```
 
@@ -196,9 +198,10 @@ Exemplo de saída serial observada no simulador:
 
 ```
 Sistema iniciado – Controle de Servo por Joystick
-ADC:    0 | Pulso:  500 µs | Ângulo:   0°
-ADC: 2047 | Pulso: 1500 µs | Ângulo:  90°
-ADC: 4095 | Pulso: 2500 µs | Ângulo: 180°
+[Eixo Y]:    0 | [Eixo X]: 2047 | [Botão]: SOLTO     | [Servo]:   0°
+[Eixo Y]: 2047 | [Eixo X]: 2047 | [Botão]: SOLTO     | [Servo]:  90°
+[Eixo Y]: 4095 | [Eixo X]: 2047 | [Botão]: SOLTO     | [Servo]: 180°
+[Eixo Y]: 2047 | [Eixo X]: 2047 | [Botão]: CLICADO   | [Servo]:  90°
 ```
 
 ---
