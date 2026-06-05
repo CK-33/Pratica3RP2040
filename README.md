@@ -11,12 +11,12 @@
 
 ## 👥 Integrantes
 
-| Nome | CPF |
-|------|-----|
-| Anderson Luiz Barreto | _______________ |
-| Ítalo Gustavo Vieira Souza | _______________ |
-| Maria Clara de Souza Silva | _______________ |
-| Thyago Torres de Castro Gama | _______________ |
+| Nome |
+|------|
+| Anderson Luiz Barreto |
+| Ítalo Gustavo Vieira Souza |
+| Maria Clara de Souza Silva |
+| Thyago Torres de Castro Gama | 
 
 ---
 
