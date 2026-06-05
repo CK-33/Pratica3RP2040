@@ -221,4 +221,4 @@ O vídeo apresenta a solução desenvolvida, demonstrando o funcionamento comple
 ---
 
 **Prazo de submissão:** 29/05/2026  
-**Repositório GitHub:** `https://github.com/<seu-usuario>/servo_joystick`
+
