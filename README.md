@@ -96,11 +96,15 @@ O joystick analógico possui dois potenciômetros que variam sua resistência co
 O valor lido pelo ADC é mapeado linearmente para uma largura de pulso PWM correspondente ao ângulo do servo:
 
 ```
+Fórmula de mapeamento do pulso:
 pulse_us = SERVO_MIN_US + (adc_val × (SERVO_MAX_US - SERVO_MIN_US)) / ADC_MAX
 
+Fórmula de mapeamento do ângulo exibido:
+ângulo = ((pulse_us - SERVO_MIN_US) × 90) / (SERVO_MAX_US - SERVO_MIN_US) - 45
+
 Onde:
-  SERVO_MIN_US = 1000  µs  →  0°
-  SERVO_MAX_US = 2000 µs  →  180°
+  SERVO_MIN_US = 1000 µs → -45° (Deflexão máxima para a esquerda)
+  SERVO_MAX_US = 2000 µs → +45° (Deflexão máxima para a direita)
   ADC_MAX      = 4095
 ```
 
@@ -110,9 +114,9 @@ O servomotor padrão opera com sinal PWM de **50 Hz** (período de 20 ms). A lar
 
 | Largura do Pulso | Ângulo |
 |-----------------|--------|
-| ~1,0 ms (1000 µs) | 0° |
-| ~1,5 ms (1500 µs) | 90° (centro) |
-| ~2,0 ms (2000 µs) | 180° |
+| ~1,0 ms (1000 µs) | -45° |
+| ~1,5 ms (1500 µs) | 0° (centro) |
+| ~2,0 ms (2000 µs) | 45° |
 
 **Configuração do PWM no RP2040:**
 - Clock do sistema: 125 MHz
@@ -126,7 +130,7 @@ O servomotor padrão opera com sinal PWM de **50 Hz** (período de 20 ms). A lar
 
 ```
 .
-├── servo_joystick.c      # Código principal em C
+├── PWM_CONV_AD.c.c      # Código principal em C
 ├── CMakeLists.txt        # Arquivo de build (CMake + Pico SDK)
 ├── diagram.json          # Diagrama de simulação para o Wokwi
 ├── wokwi.toml            # Configuração de execução do firmware no Wokwi
@@ -148,8 +152,8 @@ O servomotor padrão opera com sinal PWM de **50 Hz** (período de 20 ms). A lar
 
 ```bash
 # Clone o repositório
-git clone https://github.com/<seu-usuario>/servo_joystick.git
-cd servo_joystick
+git clone https://github.com/<seu-usuario>/PWM_CONV_AD.git
+cd PWM_CONV_AD
 
 # Crie a pasta de build e compile
 mkdir build && cd build
@@ -157,7 +161,7 @@ cmake .. -DPICO_SDK_PATH=$PICO_SDK_PATH
 make -j4
 ```
 
-Após a compilação, o arquivo `servo_joystick.uf2` estará disponível na pasta `build/`.
+Após a compilação, o arquivo `PWM_CONV_AD.uf2` estará disponível na pasta `build/`.
 
 ### Simulação no Wokwi (VS Code)
 
@@ -180,13 +184,13 @@ Após a compilação, o arquivo `servo_joystick.uf2` estará disponível na past
 
 ### Teste 2 – Verificação do PWM
 - **Objetivo:** Confirmar que o sinal PWM é gerado com frequência de 50 Hz.
-- **Procedimento:** Observar no simulador Wokwi o comportamento do servo com pulso fixo de 500 µs, 1500 µs e 2500 µs.
-- **Resultado esperado:** Servo posicionado em 0°, 90° e 180°, respectivamente.
+- **Procedimento:** Observar no simulador Wokwi o comportamento do servo com pulso fixo de 1000 µs, 1500 µs e 2000 µs.
+- **Resultado esperado:** Servo posicionado em -45°, 0° e -45°, respectivamente.
 
 ### Teste 3 – Controle Proporcional
 - **Objetivo:** Validar que o movimento do joystick controla proporcionalmente o ângulo do servo.
 - **Procedimento:** Mover o joystick suavemente do mínimo ao máximo e observar o servo.
-- **Resultado esperado:** Servo se move suavemente de 0° a 180° acompanhando o joystick.
+- **Resultado esperado:** Servo se move suavemente de -45° a +45° acompanhando o joystick.
 
 ---
 
@@ -198,10 +202,9 @@ Exemplo de saída serial observada no simulador:
 
 ```
 Sistema iniciado – Controle de Servo por Joystick
-[Eixo Y]:    0 | [Eixo X]: 2047 | [Botão]: SOLTO     | [Servo]:   0°
-[Eixo Y]: 2047 | [Eixo X]: 2047 | [Botão]: SOLTO     | [Servo]:  90°
-[Eixo Y]: 4095 | [Eixo X]: 2047 | [Botão]: SOLTO     | [Servo]: 180°
-[Eixo Y]: 2047 | [Eixo X]: 2047 | [Botão]: CLICADO   | [Servo]:  90°
+[Eixo Y]:    0 | [Eixo X]: 2047 | [Botão]: SOLTO     | [Servo]: -45°
+[Eixo Y]: 2047 | [Eixo X]: 2047 | [Botão]: SOLTO     | [Servo]:  0°
+[Eixo Y]: 4095 | [Eixo X]: 2047 | [Botão]: SOLTO     | [Servo]: +45°
 ```
 
 ---
