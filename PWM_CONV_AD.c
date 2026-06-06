@@ -21,8 +21,8 @@
    Parâmetros do Servo e ADC
    ────────────────────────────────────────────── */
 #define PWM_FREQ_HZ       50
-#define SERVO_MIN_US      1000    // µs → 0°
-#define SERVO_MAX_US      2000   // µs → 180°
+#define SERVO_MIN_US      1000    
+#define SERVO_MAX_US      2000   
 #define ADC_MAX           4095   // 12 bits
 
 /* ──────────────────────────────────────────────
