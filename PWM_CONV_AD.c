@@ -53,7 +53,7 @@ int main(void)
     servo_init(SERVO_PIN);
 
     printf("Sistema iniciado – Monitoramento Completo do Joystick\n");
-
+    
     while (true)
     {
         /* 1. Lê valor ADC do eixo Y (Canal 0 = GP26) */
@@ -67,18 +67,19 @@ int main(void)
         /* 3. Lê o estado do Botão (0 = Pressionado, 1 = Solto) */
         bool btn_pressionado = !gpio_get(JOYSTICK_SEL_PIN);
 
-        /* 4. Converte o eixo Y para controlar o servo (pode mudar para o X se quiser!) */
-        uint32_t pulse_us = map_adc_to_servo(adc_y);
+        /* 4. Converte o eixo Y para controlar o servo com inversão para ficar intuitivo */
+        uint32_t adc_invertido = 4095 - adc_y;
+        uint32_t pulse_us = map_adc_to_servo(adc_invertido);
         servo_set_us(SERVO_PIN, pulse_us);
 
-        /* 5. Cálculo do ângulo do servo para exibição */
-        uint32_t angle = ((pulse_us - SERVO_MIN_US) * 180) / (SERVO_MAX_US - SERVO_MIN_US);
+        /* 5. Nova Matemática: Mapeia de -45° a +45° baseado no range de 1000µs a 2000µs */
+        int32_t angle = (((int32_t)(pulse_us - SERVO_MIN_US) * 90) / (int32_t)(SERVO_MAX_US - SERVO_MIN_US)) - 45;
 
-        /* 6. Print formatado mostrando TODOS os dados no terminal */
-        printf("[Eixo Y]: %4u | [Eixo X]: %4u | [Botão]: %s | [Servo]: %3lu°\n",
+        /* 6. Print formatado com `%+3ld` para forçar a exibição dos sinais de + e - */
+        printf("[Eixo Y]: %4u | [Eixo X]: %4u | [Botão]: %s | [Servo]: %+3ld°\n",
                adc_y, adc_x, (btn_pressionado ? "CLICADO" : "SOLTO    "), angle);
 
-        sleep_ms(20);   // Sincroniza com a taxa de atualização do servo
+        sleep_ms(20);   
     }
 
     return 0;
