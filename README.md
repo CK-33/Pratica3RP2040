@@ -130,7 +130,7 @@ O servomotor padrão opera com sinal PWM de **50 Hz** (período de 20 ms). A lar
 
 ```
 .
-├── PWM_CONV_AD.c.c      # Código principal em C
+├── PWM_CONV_AD.c      # Código principal em C
 ├── CMakeLists.txt        # Arquivo de build (CMake + Pico SDK)
 ├── diagram.json          # Diagrama de simulação para o Wokwi
 ├── wokwi.toml            # Configuração de execução do firmware no Wokwi
@@ -185,7 +185,7 @@ Após a compilação, o arquivo `PWM_CONV_AD.uf2` estará disponível na pasta `
 ### Teste 2 – Verificação do PWM
 - **Objetivo:** Confirmar que o sinal PWM é gerado com frequência de 50 Hz.
 - **Procedimento:** Observar no simulador Wokwi o comportamento do servo com pulso fixo de 1000 µs, 1500 µs e 2000 µs.
-- **Resultado esperado:** Servo posicionado em -45°, 0° e -45°, respectivamente.
+- **Resultado esperado:** Servo posicionado em -45°, 0° e +45°, respectivamente.
 
 ### Teste 3 – Controle Proporcional
 - **Objetivo:** Validar que o movimento do joystick controla proporcionalmente o ângulo do servo.
